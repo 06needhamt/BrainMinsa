@@ -66,7 +66,7 @@ void delay (int secs) {
 }
 
 void Vectored_Interrupt(int button){
-	GLCD_Clear(White);                    /* Clear graphical LCD display        */
+	//GLCD_Clear(White);                    /* Clear graphical LCD display        */
 	GLCD_SetBackColor(Blue);
 	GLCD_SetTextColor(White);
 	

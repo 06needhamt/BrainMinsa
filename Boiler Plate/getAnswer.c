@@ -65,7 +65,6 @@ void inputAnswer(int input) {
 	switch(input) {
 		case USER_BUTTON:
 				acceptPressed();// Accept button pressed
-				
 		break;
 		case JOYSTICK_UP:
 				joystickUp();    // Up on joystick
@@ -79,7 +78,6 @@ void inputAnswer(int input) {
 		case JOYSTICK_RIGHT:
 				joystickRight(); // Right on joystick
 		break;
-
 	}
 }
 
@@ -152,13 +150,18 @@ void joystickDown() {
 	
 	char character = answerDetails.answerString[answerDetails.letterIndex]; // Get the current letter from the answerString
 	
-	for(t = 0; t < CHARSET_LENGTH && character != OriginalCharSet[t]; t++) ; // Find the current character in the original set
+	if(character == 'A')
+		character = character;
+
+	for(t = 0; t < CHARSET_LENGTH && (character != OriginalCharSet[t]); t++) ; // Find the current character in the original set
 
 	newLetter = t; // Get the appropriate letter from the original character set
 
 
-	if(--newLetter < 0) // Gone past the last letter, return to the begining
+	if(newLetter == 0) // Gone past the last letter, return to the begining
 		newLetter = CHARSET_LENGTH -1; 
+	else
+		newLetter--;
 	
 	answerDetails.answerString[answerDetails.letterIndex] = OriginalCharSet[newLetter];
 	
