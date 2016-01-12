@@ -21,11 +21,13 @@
 #include "Button_Functions.h"
 #include "Potentiometer_Functions.h"
 #include "Speaker_Functions.h"
+#include "CoundownTimer.h"
 
 #define TRUE		1
 #define FALSE		0
 
 #define LED_NUM     8                   /* Number of user LEDs  */
+#define TIMER_LENGTH 5000UL
 
 extern unsigned char clock_1s;
 
@@ -72,6 +74,7 @@ void Vectored_Interrupt(int button){
 				GLCD_DisplayString(0, 0, __FI, "< --User Button -- >");
 				
 				GLCD_DisplayString(6, 0, __FI, GenerateRandomString(5));
+							
 				//doTone = ~doTone;
 			break;
 		case JOYSTICK_SELECT:
@@ -200,9 +203,9 @@ int main (void) {
 			AD_done = 0;
 			ADC1->CR2 |= (1UL << 22);       		//Start the ADC conversion
 			doTone = 0;
-			
+
 			while (TRUE) {
-				
+				RunTimer(TIMER_LENGTH);
 				//Check to see if ADC sampling is completed
 //				if (AD_done) {
 //					//Yes, so get part of the sample value

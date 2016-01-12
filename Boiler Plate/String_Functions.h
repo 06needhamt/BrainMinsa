@@ -16,3 +16,4 @@ extern unsigned long GetTicks();
 extern void delay(int secs);
 	
 extern unsigned int Seed;
+	
