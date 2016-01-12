@@ -37,6 +37,7 @@ char* GenerateRandomString(int difficulty)
 			//delay(1);
 			Seed++;
 		}
-    AnswerString[i + 1] = '\0';
+    AnswerString[i] = '\0';
+		
     return AnswerString;
 }

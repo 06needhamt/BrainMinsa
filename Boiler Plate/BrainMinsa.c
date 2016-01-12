@@ -70,7 +70,8 @@ void Vectored_Interrupt(int button){
 	switch(button){
 		case USER_BUTTON:
 				GLCD_DisplayString(0, 0, __FI, "< --User Button -- >");
-				sprintf(outputString,"%s",GenerateRandomString(5));
+				
+				GLCD_DisplayString(6, 0, __FI, GenerateRandomString(5));
 				//doTone = ~doTone;
 			break;
 		case JOYSTICK_SELECT:
@@ -201,9 +202,7 @@ int main (void) {
 			doTone = 0;
 			
 			while (TRUE) {
-				Seed++;
-				//sprintf(outputString,"%s",GenerateRandomString(5));
-				GLCD_DisplayString(6, 0, __FI, outputString);
+				
 				//Check to see if ADC sampling is completed
 //				if (AD_done) {
 //					//Yes, so get part of the sample value
