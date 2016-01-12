@@ -21,6 +21,9 @@
 #include "Button_Functions.h"
 #include "Potentiometer_Functions.h"
 #include "Speaker_Functions.h"
+#include "string_functions.h"
+
+
 
 #define TRUE		1
 #define FALSE		0
@@ -70,7 +73,6 @@ void Vectored_Interrupt(int button){
 	switch(button){
 		case USER_BUTTON:
 				GLCD_DisplayString(0, 0, __FI, "< --User Button -- >");
-				
 				GLCD_DisplayString(6, 0, __FI, GenerateRandomString(5));
 				//doTone = ~doTone;
 			break;
@@ -79,15 +81,19 @@ void Vectored_Interrupt(int button){
 			break;
 		case JOYSTICK_UP:
 							GLCD_DisplayString(0, 0, __FI, "< --JSTK UP   -- >");
+							inputAnswer(JOYSTICK_UP);
 			break;
 		case JOYSTICK_DOWN:
 							GLCD_DisplayString(0, 0, __FI, "< --JSTK DOWN -- >");
+							inputAnswer(JOYSTICK_DOWN);
 			break;
 		case JOYSTICK_RIGHT:
 							GLCD_DisplayString(0, 0, __FI, "< --JSTK RIGHT-- >");
+							inputAnswer(JOYSTICK_RIGHT);
 			break;
 		case JOYSTICK_LEFT:
 							GLCD_DisplayString(0, 0, __FI, "< --JSTK LEFT -- >");
+							inputAnswer(JOYSTICK_LEFT);
 			break;
 		default:
 			break;
@@ -101,6 +107,8 @@ int main (void) {
 	int loopCount = 1;
 	int i, c;
 	char potOutput[20];
+
+	char userAnswer[20];
 
 	//Following statement sets the timer interrupt frequency
 	//The clock rate on this boards MCU is 72 Mhz - this means
@@ -200,6 +208,9 @@ int main (void) {
 			AD_done = 0;
 			ADC1->CR2 |= (1UL << 22);       		//Start the ADC conversion
 			doTone = 0;
+			
+			
+			initialiseGetAnswer(userAnswer, 10); // Initialise the getAnswer State
 			
 			while (TRUE) {
 				

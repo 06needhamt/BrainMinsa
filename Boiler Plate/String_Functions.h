@@ -3,16 +3,29 @@
 #include <stdlib.h>
 
 
+
 #define ANSWER_LENGTH 20
 #define CHARSET_LENGTH 36
 
-char AnswerString[20];
 
-char CharSet[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B' ,'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+extern char AnswerString[ANSWER_LENGTH];
+extern char CharSet[];
+extern char OriginalCharSet[];
+	
 
+extern void inputAnswer(int input);
+	
 char* GenerateAnswerString(int difficulty);
 	
 extern unsigned long GetTicks();
 extern void delay(int secs);
 	
 extern unsigned int Seed;
+	
+// Structure holds the state of entry by the user
+struct entryDetails {
+	int letterIndex;				// The letter being pointed at within the answer string
+	char answerString[20];  // Holds the list of characters input by the user
+};
+
+char *initialiseGetAnswer(char *answer, int length);

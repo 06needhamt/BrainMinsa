@@ -452,6 +452,11 @@
               <FileType>1</FileType>
               <FilePath>.\String_Functions.c</FilePath>
             </File>
+            <File>
+              <FileName>getAnswer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\getAnswer.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -911,6 +916,11 @@
               <FileName>String_Functions.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\String_Functions.c</FilePath>
+            </File>
+            <File>
+              <FileName>getAnswer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\getAnswer.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1372,6 +1382,11 @@
               <FileType>1</FileType>
               <FilePath>.\String_Functions.c</FilePath>
             </File>
+            <File>
+              <FileName>getAnswer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\getAnswer.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1831,6 +1846,11 @@
               <FileName>String_Functions.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\String_Functions.c</FilePath>
+            </File>
+            <File>
+              <FileName>getAnswer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\getAnswer.c</FilePath>
             </File>
           </Files>
         </Group>
