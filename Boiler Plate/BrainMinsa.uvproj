@@ -408,11 +408,6 @@
           <GroupName>Source Files</GroupName>
           <Files>
             <File>
-              <FileName>BoilerPlate.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\BoilerPlate.c</FilePath>
-            </File>
-            <File>
               <FileName>GLCD_16bitIF_STM32.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\GLCD_16bitIF_STM32.c</FilePath>
@@ -446,6 +441,11 @@
               <FileName>Speaker_Functions.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Speaker_Functions.c</FilePath>
+            </File>
+            <File>
+              <FileName>BrainMinsa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BrainMinsa.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -863,11 +863,6 @@
           <GroupName>Source Files</GroupName>
           <Files>
             <File>
-              <FileName>BoilerPlate.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\BoilerPlate.c</FilePath>
-            </File>
-            <File>
               <FileName>GLCD_16bitIF_STM32.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\GLCD_16bitIF_STM32.c</FilePath>
@@ -901,6 +896,11 @@
               <FileName>Speaker_Functions.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Speaker_Functions.c</FilePath>
+            </File>
+            <File>
+              <FileName>BrainMinsa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BrainMinsa.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1318,11 +1318,6 @@
           <GroupName>Source Files</GroupName>
           <Files>
             <File>
-              <FileName>BoilerPlate.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\BoilerPlate.c</FilePath>
-            </File>
-            <File>
               <FileName>GLCD_16bitIF_STM32.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\GLCD_16bitIF_STM32.c</FilePath>
@@ -1356,6 +1351,11 @@
               <FileName>Speaker_Functions.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Speaker_Functions.c</FilePath>
+            </File>
+            <File>
+              <FileName>BrainMinsa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BrainMinsa.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1773,11 +1773,6 @@
           <GroupName>Source Files</GroupName>
           <Files>
             <File>
-              <FileName>BoilerPlate.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\BoilerPlate.c</FilePath>
-            </File>
-            <File>
               <FileName>GLCD_16bitIF_STM32.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\GLCD_16bitIF_STM32.c</FilePath>
@@ -1811,6 +1806,11 @@
               <FileName>Speaker_Functions.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Speaker_Functions.c</FilePath>
+            </File>
+            <File>
+              <FileName>BrainMinsa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BrainMinsa.c</FilePath>
             </File>
           </Files>
         </Group>
