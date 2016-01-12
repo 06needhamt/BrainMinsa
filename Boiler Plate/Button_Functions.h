@@ -4,6 +4,7 @@
 #define JOYSTICK_DOWN 3
 #define JOYSTICK_LEFT 4
 #define JOYSTICK_RIGHT 5
+#define POTENTIOMETER_TURNED 6
 
 void userButton_Init(void); //initialise the user button as input
 

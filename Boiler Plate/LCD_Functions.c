@@ -34,3 +34,19 @@ void displayTestMessage(int lineNo, int colNo, unsigned char* msgText, int loopC
 
 	oldLineNo = lineNo;
 }
+
+void updateScoreAndDifficulty(int score, int currentDifficulty, int nextDifficulty){
+	char message[20]; //maximum size of a message displayed in a single row
+	
+	/*work out buffer size used within sprintf for the score
+	we have a total of 20 spaces; "Score:" is 6 characters long
+	" Lvl " is 5, "(" and ")" are 2, 
+	nextDifficulty as well as currentDifficulty both one character long, so together 2
+	*/
+	
+	GLCD_SetBackColor(Blue);
+	GLCD_SetTextColor(White);
+	
+	sprintf(message, "Score:%05d%s%d%c%d%c", score, " Lvl ", currentDifficulty, '(', nextDifficulty, ')');
+	GLCD_DisplayString(1,0, __FI, message);
+}

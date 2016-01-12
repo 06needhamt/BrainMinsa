@@ -27,6 +27,10 @@
 
 #define LED_NUM     8                   /* Number of user LEDs  */
 
+#define AWAIT_USER_READY 0; //state representing that the program should wait for the user to be ready for the next question
+#define AWAIT_USER_ANSWER 1; //state representing that the program should wait for the user to input their answer
+int currentState = AWAIT_USER_READY; //default current state of the program
+
 extern unsigned char clock_1s;
 
 //Following are used for ADC
@@ -38,6 +42,7 @@ extern char* GenerateRandomString(int difficulty);
 int doTone = 0;
 char outputString[20];
 unsigned int Seed = 0;
+int c = 0;
 //This function delays program by secs seconds. This function relies on
 //a timer which is used to produce an interrupt at regular intervals. See
 //further down for the way this timer is activated. The timer interrupt
@@ -63,32 +68,48 @@ void delay (int secs) {
 }
 
 void Vectored_Interrupt(int button){
-	GLCD_Clear(White);                    /* Clear graphical LCD display        */
+	char cString[4];
+	//GLCD_Clear(White);                    /* Clear graphical LCD display        */
 	GLCD_SetBackColor(Blue);
 	GLCD_SetTextColor(White);
 	
 	switch(button){
 		case USER_BUTTON:
-				GLCD_DisplayString(0, 0, __FI, "< --User Button -- >");
-				
+				//GLCD_DisplayString(0, 0, __FI, "< --User Button -- >");
 				GLCD_DisplayString(6, 0, __FI, GenerateRandomString(5));
 				//doTone = ~doTone;
 			break;
+		
 		case JOYSTICK_SELECT:
-							GLCD_DisplayString(0, 0, __FI, "< --JSTK Select -->");
+				//GLCD_DisplayString(0, 0, __FI, "< --JSTK Select -->");
+				updateScoreAndDifficulty(100, 2, 3);
 			break;
+		
 		case JOYSTICK_UP:
-							GLCD_DisplayString(0, 0, __FI, "< --JSTK UP   -- >");
+				//GLCD_DisplayString(0, 0, __FI, "< --JSTK UP   -- >");
+				updateScoreAndDifficulty(99999, 9, 9);
 			break;
+		
 		case JOYSTICK_DOWN:
-							GLCD_DisplayString(0, 0, __FI, "< --JSTK DOWN -- >");
+				//GLCD_DisplayString(0, 0, __FI, "< --JSTK DOWN -- >");
+				updateScoreAndDifficulty(0, 1, 2);
 			break;
+		
 		case JOYSTICK_RIGHT:
-							GLCD_DisplayString(0, 0, __FI, "< --JSTK RIGHT-- >");
+				//GLCD_DisplayString(0, 0, __FI, "< --JSTK RIGHT-- >");
+				updateScoreAndDifficulty(12345, 6, 7);
 			break;
+		
 		case JOYSTICK_LEFT:
-							GLCD_DisplayString(0, 0, __FI, "< --JSTK LEFT -- >");
+				//GLCD_DisplayString(0, 0, __FI, "< --JSTK LEFT -- >");
+				updateScoreAndDifficulty(1337, 1, 1);
 			break;
+		
+		case POTENTIOMETER_TURNED:
+			  sprintf(cString, "%02d", c);
+				GLCD_DisplayString(2,0, __FI, cString);
+			break;
+		
 		default:
 			break;
 	}
@@ -98,8 +119,7 @@ void Vectored_Interrupt(int button){
   Main Program
  *----------------------------------------------------------------------------*/
 int main (void) {
-	int loopCount = 1;
-	int i, c;
+	int i;
 	char potOutput[20];
 
 	//Following statement sets the timer interrupt frequency
@@ -132,17 +152,7 @@ int main (void) {
 	GLCD_Clear(White);                    /* Clear graphical LCD display        */
 	GLCD_SetBackColor(Blue);
 	GLCD_SetTextColor(White);
-	GLCD_DisplayString(0, 0, __FI, "< --Boiler Plate-- >");
-	GLCD_DisplayString(1, 0, __FI, "<---Hello  World--->");
-	GLCD_DisplayString(2, 0, __FI, "====================");
-	GLCD_SetBackColor(White);
-	GLCD_SetTextColor(Blue);
-	GLCD_DisplayString(3, 0, __FI, "Ex1:");
-	GLCD_DisplayString(4, 0, __FI, "Ex2:");
-	GLCD_DisplayString(5, 0, __FI, "Ex3:");
-	GLCD_DisplayString(6, 0, __FI, "Ex4:");
-	GLCD_DisplayString(7, 0, __FI, "Ex5:");
-	GLCD_DisplayString(8, 0, __FI, "Ex6:");
+	GLCD_DisplayString(0, 0, __FI, "<----BrainMINSA---->");
 #endif // __USE_LCD
 
 	//The main body of the program requires a continuous loop which
@@ -150,31 +160,6 @@ int main (void) {
 	//states. It will be interrupted at regular intervals by the
 	//vectored timer interrupt as explained above!
   	
-		
-		/** while (TRUE) {                           /* Loop forever /                       
-
-		displayTestMessage(3, 4, "LED Test1", loopCount);
-		//For all 8 LEDs do
-	  	for (i = 0; i < LED_NUM; i++) {
-			//Switch a LED on
-			LED_On(i);
-			//Wait for a second
-			delay(1);
-			//Switch LED off
-			LED_Off(i);
-			//Wait for a second
-			delay(1);
-		}                                           
-
-		displayTestMessage(4, 4, "LED Test2", loopCount);
-		//Slow flash all LEDs 4 times
-		for (i = 0; i != 3; i++) {
-			All_LEDs_On();
-			delay(1);
-			All_LEDs_Off();
-			delay(1);
-		} **/
-
 	//Here we initialise the Joystick driver
 	joyStick_Init();
 
@@ -192,17 +177,12 @@ int main (void) {
   joyStick_IntrEnable_PG15_13();
 	joyStick_IntrEnable_PG7();
 	joyStick_IntrEnable_PD3();
-	
-		//while(TRUE){ //loop forever, testing vectored interrupts
+
+	AD_done = 0;
+	ADC1->CR2 |= (1UL << 22);       		//Start the ADC conversion
+	doTone = 0;
 			
-		//}
-		
-			AD_done = 0;
-			ADC1->CR2 |= (1UL << 22);       		//Start the ADC conversion
-			doTone = 0;
-			
-			while (TRUE) {
-				
+	while (TRUE) {
 				//Check to see if ADC sampling is completed
 //				if (AD_done) {
 //					//Yes, so get part of the sample value
@@ -215,12 +195,5 @@ int main (void) {
 //					}
 //					AD_done = 0;  					//Reset the ADC complete flag waiting for next sample
 //					ADC1->CR2 |= (1UL << 22);   	//Start the next ADC conversion
-				
-				}
-		
-		/* PUT MORE LED DISPLAY PATTERNS BELOW */
-
-
-		//Increment the loop count
-		loopCount += 1;
+	}
 }
