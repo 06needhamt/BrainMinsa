@@ -33,7 +33,11 @@ extern unsigned char clock_1s;
 extern unsigned short AD_last;	 		//Last ADC conversion value
 extern unsigned char  AD_done;			//ADC conversion complete flag
 extern unsigned long ticks;
+extern char* GenerateRandomString(int difficulty);
+
 int doTone = 0;
+char outputString[20];
+unsigned int Seed = 0;
 //This function delays program by secs seconds. This function relies on
 //a timer which is used to produce an interrupt at regular intervals. See
 //further down for the way this timer is activated. The timer interrupt
@@ -66,7 +70,8 @@ void Vectored_Interrupt(int button){
 	switch(button){
 		case USER_BUTTON:
 				GLCD_DisplayString(0, 0, __FI, "< --User Button -- >");
-				doTone = ~doTone;
+				sprintf(outputString,"%s",GenerateRandomString(5));
+				//doTone = ~doTone;
 			break;
 		case JOYSTICK_SELECT:
 							GLCD_DisplayString(0, 0, __FI, "< --JSTK Select -->");
@@ -94,7 +99,7 @@ void Vectored_Interrupt(int button){
 int main (void) {
 	int loopCount = 1;
 	int i, c;
-	unsigned char potOutput[20];
+	char potOutput[20];
 
 	//Following statement sets the timer interrupt frequency
 	//The clock rate on this boards MCU is 72 Mhz - this means
@@ -194,21 +199,25 @@ int main (void) {
 			AD_done = 0;
 			ADC1->CR2 |= (1UL << 22);       		//Start the ADC conversion
 			doTone = 0;
+			
 			while (TRUE) {
+				Seed++;
+				//sprintf(outputString,"%s",GenerateRandomString(5));
+				GLCD_DisplayString(6, 0, __FI, outputString);
 				//Check to see if ADC sampling is completed
-				if (AD_done) {
-					//Yes, so get part of the sample value
-					c = (AD_last >> 8) + 4;
-					if (doTone) {
-						//If enabled, switch the tone on
-							sprintf(potOutput,"Pot = %d",c);
-							displayTestMessage(1,0,potOutput,0);
-				   		generate_Tone_On_Speaker(c * 50, 10);
-					}
-					AD_done = 0;  					//Reset the ADC complete flag waiting for next sample
-					ADC1->CR2 |= (1UL << 22);   	//Start the next ADC conversion
+//				if (AD_done) {
+//					//Yes, so get part of the sample value
+//					c = (AD_last >> 8) + 4;
+//					if (doTone) {
+//						//If enabled, switch the tone on
+//							sprintf(potOutput,"Pot = %d",c);
+//							displayTestMessage(1,0,potOutput,0);
+//				   		generate_Tone_On_Speaker(c * 50, 10);
+//					}
+//					AD_done = 0;  					//Reset the ADC complete flag waiting for next sample
+//					ADC1->CR2 |= (1UL << 22);   	//Start the next ADC conversion
+				
 				}
-			}
 		
 		/* PUT MORE LED DISPLAY PATTERNS BELOW */
 
