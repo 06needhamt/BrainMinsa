@@ -43,6 +43,9 @@ int doTone = 0;
 char outputString[20];
 unsigned int Seed = 0;
 int c = 0;
+int currDifficulty = 0;
+int nextDifficulty = 0;
+int currentScore = 1337;
 //This function delays program by secs seconds. This function relies on
 //a timer which is used to produce an interrupt at regular intervals. See
 //further down for the way this timer is activated. The timer interrupt
@@ -68,7 +71,7 @@ void delay (int secs) {
 }
 
 void Vectored_Interrupt(int button){
-	char cString[4];
+	char cString[4], currDiffString[4];
 	//GLCD_Clear(White);                    /* Clear graphical LCD display        */
 	GLCD_SetBackColor(Blue);
 	GLCD_SetTextColor(White);
@@ -106,8 +109,10 @@ void Vectored_Interrupt(int button){
 			break;
 		
 		case POTENTIOMETER_TURNED:
-			  sprintf(cString, "%02d", c);
-				GLCD_DisplayString(2,0, __FI, cString);
+			  //sprintf(cString, "%02d", c);
+					nextDifficulty = (c / 3) + 1;
+					sprintf(currDiffString, "%1d", nextDifficulty);
+					updateScoreAndDifficulty(currentScore, currDifficulty, nextDifficulty);
 			break;
 		
 		default:
