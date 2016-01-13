@@ -50,3 +50,9 @@ void updateScoreAndDifficulty(int score, int currentDifficulty, int nextDifficul
 	sprintf(message, "Score:%05d%s%d%c%d%c", score, " Lvl ", currentDifficulty, '(', nextDifficulty, ')');
 	GLCD_DisplayString(1,0, __FI, message);
 }
+
+void updateNextDifficulty(int nextDifficulty){
+	char msg[4];
+	sprintf(msg, "%1d", nextDifficulty);
+	GLCD_DisplayChar(1,18, __FI, *msg);
+}

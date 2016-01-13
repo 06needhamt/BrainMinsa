@@ -16,7 +16,7 @@ extern unsigned int Seed;
 extern int c;
 unsigned short AD_last;                 /* Last converted value               */
 unsigned char  AD_done = 0;             /* AD conversion done flag            */
-
+int ADC_Checker;
 unsigned long ticks;
 
 unsigned char  clock_1s;                /* Flag activated each second         */
@@ -52,7 +52,12 @@ void ADC1_2_IRQHandler(void) {
   if (ADC1->SR & (1 << 1)) {            /* ADC1 EOC interrupt?                */
     AD_last = ADC1->DR;
 		c = (AD_last >> 8);
+		if(c != ADC_Checker){
+		ADC_Checker = c;
 		Vectored_Interrupt(POTENTIOMETER_TURNED);
+		}
+		
+		
 		ADC1->CR2 |= (1UL << 22);   	//Start the next ADC conversion
 		ADC1->SR &= ~(1 << 1);              /* clear EOC interrupt                */
   }

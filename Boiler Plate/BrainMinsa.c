@@ -112,7 +112,10 @@ void Vectored_Interrupt(int button){
 			  //sprintf(cString, "%02d", c);
 					nextDifficulty = (c / 3) + 1;
 					sprintf(currDiffString, "%1d", nextDifficulty);
-					updateScoreAndDifficulty(currentScore, currDifficulty, nextDifficulty);
+					//updateScoreAndDifficulty(currentScore, currDifficulty, nextDifficulty);
+					updateNextDifficulty(nextDifficulty);
+					GLCD_SetBackColor(Red);
+					
 			break;
 		
 		default:

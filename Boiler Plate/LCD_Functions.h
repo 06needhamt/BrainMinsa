@@ -5,3 +5,5 @@
 void displayTestMessage(int lineNo, int colNo, unsigned char* msgText, int loopCount);
 
 void updateScoreAndDifficulty(int score, int currentDifficulty, int nextDifficulty);
+
+void updateNextDifficulty(int nextDifficulty);
