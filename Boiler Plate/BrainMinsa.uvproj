@@ -472,6 +472,11 @@
               <FileType>1</FileType>
               <FilePath>.\Instruction_Screen.c</FilePath>
             </File>
+            <File>
+              <FileName>WelcomeScreen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WelcomeScreen.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -951,6 +956,11 @@
               <FileName>Instruction_Screen.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Instruction_Screen.c</FilePath>
+            </File>
+            <File>
+              <FileName>WelcomeScreen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WelcomeScreen.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1432,6 +1442,11 @@
               <FileType>1</FileType>
               <FilePath>.\Instruction_Screen.c</FilePath>
             </File>
+            <File>
+              <FileName>WelcomeScreen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WelcomeScreen.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1911,6 +1926,11 @@
               <FileName>Instruction_Screen.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Instruction_Screen.c</FilePath>
+            </File>
+            <File>
+              <FileName>WelcomeScreen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WelcomeScreen.c</FilePath>
             </File>
           </Files>
         </Group>

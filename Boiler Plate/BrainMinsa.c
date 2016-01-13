@@ -35,6 +35,7 @@
 #define AWAIT_USER_READY 0 //state representing that the program should wait for the user to be ready for the next question
 #define AWAIT_USER_ANSWER 1 //state representing that the program should wait for the user to input their answer
 #define ON_DIFFICULTY_SCREEN 2 // state representing that the user is currently on the difficulty screen
+#define WELCOME_SCREEN 3 // Welcome Screen displayed
 
 #define BAR_X 200
 #define BAR_Y (6 * 24)
@@ -42,7 +43,9 @@
 #define BAR_HEIGHT 15
 #define BAR_VALUE 1
 
-int currentState = AWAIT_USER_READY; //default current state of the program
+extern void WelcomeScreen(void);
+
+int currentState = WELCOME_SCREEN; //default current state of the program
 
 extern unsigned char clock_1s;
 
@@ -93,6 +96,30 @@ void Vectored_Interrupt(int button){
 	switch(button){
 		case USER_BUTTON:
 				//GLCD_DisplayString(0, 0, __FI, "< --User Button -- >");
+				switch(currentState) {
+					case WELCOME_SCREEN:
+						GLCD_Clear(White);
+						if(currDifficulty == 0){
+							currDifficulty = 1;
+						}
+						updateNextDifficulty(nextDifficulty);
+						DisplayInstructions(NULL,currentScore,currDifficulty,1);
+						DrawBarGraph(BAR_X,BAR_Y,currDifficulty * 20,BAR_HEIGHT,BAR_VALUE);
+						
+						currentState = ON_DIFFICULTY_SCREEN;
+						
+					break;
+						
+					case ON_DIFFICULTY_SCREEN:	
+						
+					break;
+					
+					
+					
+				};
+						
+		
+		
 				GLCD_DisplayString(6, 0, __FI, GenerateRandomString(5));
 				
 				//doTone = ~doTone;
@@ -130,13 +157,17 @@ void Vectored_Interrupt(int button){
 		
 		case POTENTIOMETER_TURNED:
 			  //sprintf(cString, "%02d", c);
+		
+			switch(currentState) {
+				case ON_DIFFICULTY_SCREEN:
 					nextDifficulty = (c / 3) + 1;
 					sprintf(currDiffString, "%1d", nextDifficulty);
 					//updateScoreAndDifficulty(currentScore, currDifficulty, nextDifficulty);
 					updateNextDifficulty(nextDifficulty);
 					DrawBarGraph(BAR_X,BAR_Y,nextDifficulty * 20,BAR_HEIGHT,BAR_VALUE);
 					//GLCD_SetBackColor(Red);
-					
+				break;
+			}		
 					
 			break;
 		
@@ -164,70 +195,50 @@ int main (void) {
 	//need to modify the interrupt handler routine in IRQ.c file.
   	SysTick_Config(SystemCoreClock/10000);  /* Generate interrupt each 10 ms      */
 
-   	//Here we initialise the LED driver
-  	LED_init();                           /* LED Initialization                 */
+   	
+	LED_init(); /* LED Initialization                 */
 
-		pin_PA4_For_Speaker(); //Function that initializes the Speaker
-			
-		ADC_init(); //Function that initializes ADC
-	
-#ifdef __USE_LCD
-	//In order to use the LCD display, the device needs to be
-	//properly configured and initialized (refer to GLCD_16bitIF_STM32.c file).
-	//This is a complex process and is beyond the scope of this module.
-  	GLCD_Init();                          /* Initialize graphical LCD display   */
-	//The following functions demonstrate how the LCD display can be used.
-	//This is a 240 x 320 pixel colour screen and the pixels can be individually
-	//manipulated allowing graphics shapes to be constructed and displayed.
-	//This configuration allows 20 characters per line and 10 lines (16x24 pixel characters).
-	GLCD_Clear(White);                    /* Clear graphical LCD display        */
-	GLCD_SetBackColor(Blue);
-	GLCD_SetTextColor(White);
-	GLCD_DisplayString(0, 0, __FI, "<----BrainMINSA---->");
-#endif // __USE_LCD
+	pin_PA4_For_Speaker(); //Function that initializes the Speaker
+		
+	ADC_init();  //Function that initializes ADC
 
-	//The main body of the program requires a continuous loop which
-	//generally executes various functions and monitors various device
-	//states. It will be interrupted at regular intervals by the
-	//vectored timer interrupt as explained above!
-  	
-	//Here we initialise the Joystick driver
-	joyStick_Init();
+	GLCD_Init(); /* Initialize graphical LCD display   */
+  		
+	joyStick_Init(); // Initialise the joystick
 
-	//Here we initialise the User button as an input source
-	//If you wish to poll this source (PG8) for input you need
-	//this initialisation.
-	userButton_Init();
-	
-  //Here we initialise the User button as an interrupt source
-	//If you wish to use this source (PG8) for interrupt vectoring
-	//then you need	the above initialisation and this initialisation.
-	userButton_IntrEnable();
+	userButton_Init(); // Initialise User Button
+
+	userButton_IntrEnable(); //initialise the User button as an interrupt source
 
   //Here we initialise the Joystick switches as interrupt sources
   joyStick_IntrEnable_PG15_13();
 	joyStick_IntrEnable_PG7();
 	joyStick_IntrEnable_PD3();
 	
-	
-
 	AD_done = 0;
 	ADC1->CR2 |= (1UL << 22);       		//Start the ADC conversion
 	doTone = 0;
-	currentState = ON_DIFFICULTY_SCREEN;
 	
+	WelcomeScreen();
+
+	
+
+
 	initialiseGetAnswer(answer, 10);
-	if(currentState == ON_DIFFICULTY_SCREEN)
-	{
-			GLCD_Clear(White);
-			if(currDifficulty == 0){
-				currDifficulty = 1;
-			}
-			updateNextDifficulty(nextDifficulty);
-			DisplayInstructions(NULL,currentScore,currDifficulty,1);
-			DrawBarGraph(BAR_X,BAR_Y,currDifficulty * 20,BAR_HEIGHT,BAR_VALUE);
-	}	
+//	if(currentState == ON_DIFFICULTY_SCREEN)
+//	{
+//			GLCD_Clear(White);
+//			if(currDifficulty == 0){
+//				currDifficulty = 1;
+//			}
+//			updateNextDifficulty(nextDifficulty);
+//			DisplayInstructions(NULL,currentScore,currDifficulty,1);
+//			DrawBarGraph(BAR_X,BAR_Y,currDifficulty * 20,BAR_HEIGHT,BAR_VALUE);
+//	}	
 	while (TRUE) {
+	
+		
+		
 //								
 //				//RunTimer(TIMER_LENGTH);
 //			GLCD_SetBackColor(Red);
