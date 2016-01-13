@@ -82,6 +82,7 @@ void Vectored_Interrupt(int button){
 		case JOYSTICK_UP:
 							GLCD_DisplayString(0, 0, __FI, "< --JSTK UP   -- >");
 							inputAnswer(JOYSTICK_UP);
+							
 			break;
 		case JOYSTICK_DOWN:
 							GLCD_DisplayString(0, 0, __FI, "< --JSTK DOWN -- >");
@@ -210,7 +211,7 @@ int main (void) {
 			doTone = 0;
 			
 			
-			initialiseGetAnswer(userAnswer, 10); // Initialise the getAnswer State
+		initialiseGetAnswer(userAnswer, 10); // Initialise the getAnswer State
 			
 			while (TRUE) {
 				

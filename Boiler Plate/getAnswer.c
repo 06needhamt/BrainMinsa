@@ -222,6 +222,9 @@ void acceptPressed() {
 	if(!getAnswerState) // Not expecting an answer so do nothing
 		return;
 	
+	// Compare the correct answer with the users answer and highlight correct/incorrect letters
+	
+	
 	
 	
 	

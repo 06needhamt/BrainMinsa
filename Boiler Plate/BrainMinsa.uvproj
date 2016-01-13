@@ -457,6 +457,11 @@
               <FileType>1</FileType>
               <FilePath>.\getAnswer.c</FilePath>
             </File>
+            <File>
+              <FileName>Instruction_Screen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Instruction_Screen.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -921,6 +926,11 @@
               <FileName>getAnswer.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\getAnswer.c</FilePath>
+            </File>
+            <File>
+              <FileName>Instruction_Screen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Instruction_Screen.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1387,6 +1397,11 @@
               <FileType>1</FileType>
               <FilePath>.\getAnswer.c</FilePath>
             </File>
+            <File>
+              <FileName>Instruction_Screen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Instruction_Screen.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1851,6 +1866,11 @@
               <FileName>getAnswer.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\getAnswer.c</FilePath>
+            </File>
+            <File>
+              <FileName>Instruction_Screen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Instruction_Screen.c</FilePath>
             </File>
           </Files>
         </Group>
