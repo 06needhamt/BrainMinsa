@@ -23,6 +23,8 @@
 #include "Speaker_Functions.h"
 #include "CoundownTimer.h"
 #include "DifficultyScreen.h"
+#include "String_Functions.h"
+
 
 #define TRUE		1
 #define FALSE		0
@@ -84,32 +86,38 @@ void Vectored_Interrupt(int button){
 		case USER_BUTTON:
 				//GLCD_DisplayString(0, 0, __FI, "< --User Button -- >");
 				GLCD_DisplayString(6, 0, __FI, GenerateRandomString(5));
+				
 				//doTone = ~doTone;
 			break;
 		
 		case JOYSTICK_SELECT:
 				//GLCD_DisplayString(0, 0, __FI, "< --JSTK Select -->");
 				updateScoreAndDifficulty(100, 2, 3);
+				inputAnswer(JOYSTICK_SELECT);
 			break;
 		
 		case JOYSTICK_UP:
 				//GLCD_DisplayString(0, 0, __FI, "< --JSTK UP   -- >");
 				updateScoreAndDifficulty(99999, 9, 9);
+				inputAnswer(JOYSTICK_UP);
 			break;
 		
 		case JOYSTICK_DOWN:
 				//GLCD_DisplayString(0, 0, __FI, "< --JSTK DOWN -- >");
 				updateScoreAndDifficulty(0, 1, 2);
+				inputAnswer(JOYSTICK_DOWN);
 			break;
 		
 		case JOYSTICK_RIGHT:
 				//GLCD_DisplayString(0, 0, __FI, "< --JSTK RIGHT-- >");
 				updateScoreAndDifficulty(12345, 6, 7);
+				inputAnswer(JOYSTICK_RIGHT);
 			break;
 		
 		case JOYSTICK_LEFT:
 				//GLCD_DisplayString(0, 0, __FI, "< --JSTK LEFT -- >");
 				updateScoreAndDifficulty(1337, 1, 1);
+				inputAnswer(JOYSTICK_LEFT);
 			break;
 		
 		case POTENTIOMETER_TURNED:
@@ -133,6 +141,7 @@ void Vectored_Interrupt(int button){
 int main (void) {
 	int i;
 	char potOutput[20];
+	char answer[10];
 
 	//Following statement sets the timer interrupt frequency
 	//The clock rate on this boards MCU is 72 Mhz - this means
@@ -189,11 +198,14 @@ int main (void) {
   joyStick_IntrEnable_PG15_13();
 	joyStick_IntrEnable_PG7();
 	joyStick_IntrEnable_PD3();
+	
+	
 
 	AD_done = 0;
 	ADC1->CR2 |= (1UL << 22);       		//Start the ADC conversion
 	doTone = 0;
 			
+	initialiseGetAnswer(answer, 10);
 	while (TRUE) {
 								
 				//RunTimer(TIMER_LENGTH);

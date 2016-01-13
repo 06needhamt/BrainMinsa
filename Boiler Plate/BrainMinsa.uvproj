@@ -462,6 +462,16 @@
               <FileType>1</FileType>
               <FilePath>.\DifficultyScreen.c</FilePath>
             </File>
+            <File>
+              <FileName>getAnswer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\getAnswer.c</FilePath>
+            </File>
+            <File>
+              <FileName>Instruction_Screen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Instruction_Screen.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -931,6 +941,16 @@
               <FileName>DifficultyScreen.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\DifficultyScreen.c</FilePath>
+            </File>
+            <File>
+              <FileName>getAnswer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\getAnswer.c</FilePath>
+            </File>
+            <File>
+              <FileName>Instruction_Screen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Instruction_Screen.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1402,6 +1422,16 @@
               <FileType>1</FileType>
               <FilePath>.\DifficultyScreen.c</FilePath>
             </File>
+            <File>
+              <FileName>getAnswer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\getAnswer.c</FilePath>
+            </File>
+            <File>
+              <FileName>Instruction_Screen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Instruction_Screen.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1871,6 +1901,16 @@
               <FileName>DifficultyScreen.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\DifficultyScreen.c</FilePath>
+            </File>
+            <File>
+              <FileName>getAnswer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\getAnswer.c</FilePath>
+            </File>
+            <File>
+              <FileName>Instruction_Screen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Instruction_Screen.c</FilePath>
             </File>
           </Files>
         </Group>
