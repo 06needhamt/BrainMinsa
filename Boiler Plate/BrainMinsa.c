@@ -32,8 +32,16 @@
 #define LED_NUM     8                   /* Number of user LEDs  */
 #define TIMER_LENGTH 5000UL
 
-#define AWAIT_USER_READY 0; //state representing that the program should wait for the user to be ready for the next question
-#define AWAIT_USER_ANSWER 1; //state representing that the program should wait for the user to input their answer
+#define AWAIT_USER_READY 0 //state representing that the program should wait for the user to be ready for the next question
+#define AWAIT_USER_ANSWER 1 //state representing that the program should wait for the user to input their answer
+#define ON_DIFFICULTY_SCREEN 2 // state representing that the user is currently on the difficulty screen
+
+#define BAR_X 200
+#define BAR_Y (6 * 24)
+#define BAR_WIDTH 100
+#define BAR_HEIGHT 15
+#define BAR_VALUE 1
+
 int currentState = AWAIT_USER_READY; //default current state of the program
 
 extern unsigned char clock_1s;
@@ -126,7 +134,9 @@ void Vectored_Interrupt(int button){
 					sprintf(currDiffString, "%1d", nextDifficulty);
 					//updateScoreAndDifficulty(currentScore, currDifficulty, nextDifficulty);
 					updateNextDifficulty(nextDifficulty);
-					GLCD_SetBackColor(Red);
+					DrawBarGraph(BAR_X,BAR_Y,nextDifficulty * 20,BAR_HEIGHT,BAR_VALUE);
+					//GLCD_SetBackColor(Red);
+					
 					
 			break;
 		
@@ -204,20 +214,31 @@ int main (void) {
 	AD_done = 0;
 	ADC1->CR2 |= (1UL << 22);       		//Start the ADC conversion
 	doTone = 0;
-			
+	currentState = ON_DIFFICULTY_SCREEN;
+	
 	initialiseGetAnswer(answer, 10);
-	while (TRUE) {
-								
-				//RunTimer(TIMER_LENGTH);
-			GLCD_SetBackColor(Red);
-			DrawBarGraph(100,6*24,barWidth,15,1);
-			delay10th(10000);
-			GLCD_SetBackColor(White);
-			barWidth -= 20;
-			if(barWidth <= 0){
-				barWidth = 100;
+	if(currentState == ON_DIFFICULTY_SCREEN)
+	{
+			GLCD_Clear(White);
+			if(currDifficulty == 0){
+				currDifficulty = 1;
 			}
-			GLCD_DisplayString(6,0,__FI,"                   ");
+			updateNextDifficulty(nextDifficulty);
+			DisplayInstructions(NULL,currentScore,currDifficulty,1);
+			DrawBarGraph(BAR_X,BAR_Y,currDifficulty * 20,BAR_HEIGHT,BAR_VALUE);
+	}	
+	while (TRUE) {
+//								
+//				//RunTimer(TIMER_LENGTH);
+//			GLCD_SetBackColor(Red);
+//			DrawBarGraph(100,6*24,barWidth,15,1);
+//			delay10th(10000);
+//			GLCD_SetBackColor(White);
+//			barWidth -= 20;
+//			if(barWidth <= 0){
+//				barWidth = 100;
+//			}
+//			GLCD_DisplayString(6,0,__FI,"                   ");
 				//Check to see if ADC sampling is completed
 //				if (AD_done) {
 //					//Yes, so get part of the sample value

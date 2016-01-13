@@ -43,7 +43,9 @@ void updateScoreAndDifficulty(int score, int currentDifficulty, int nextDifficul
 	" Lvl " is 5, "(" and ")" are 2, 
 	nextDifficulty as well as currentDifficulty both one character long, so together 2
 	*/
-	
+	if(currentDifficulty == 0){
+		currentDifficulty = 1;
+	}
 	GLCD_SetBackColor(Blue);
 	GLCD_SetTextColor(White);
 	

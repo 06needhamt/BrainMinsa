@@ -17,7 +17,7 @@ extern void inputAnswer(int input);
 	
 char* GenerateAnswerString(int difficulty);
 	
-extern unsigned long GetTicks();
+extern unsigned long GetTicks(void);
 extern void delay(int secs);
 	
 extern unsigned int Seed;
