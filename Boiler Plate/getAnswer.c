@@ -16,7 +16,6 @@ void acceptPressed(void);
 #define LETTER_PLACEHOLDER '.'
 
 
-
 // Structure holds the state of entry by the user
 static struct entryDetails answerDetails;
 static int getAnswerState = 0;
@@ -24,10 +23,15 @@ static int length = 0;
 static int margin = 0;
 
 
-char *initialiseGetAnswer(char *answer, int len) {
+char *initialiseGetAnswer(char *answer, int len) { // Len based on difficulty
 	int t;
 	int position;
   unsigned char letters[2] = {'\0', '\0'}; // Short string used to display letters
+
+	if(len == 5) // Correct length of answer
+		len++;
+	
+	len+=4;
 	
 	if(getAnswerState == 1)  // Get answer is is already functioning
 		return ""; // <<<<<<<<<<<<<<<<< fix this
@@ -58,12 +62,7 @@ char *initialiseGetAnswer(char *answer, int len) {
 	
 	for(t = 1; t < length; t++) 
 		GLCD_DisplayString(5, position + t, __FI, letters);
-	
-	
-	
-	
-	//GLCD_DisplayString(5, margin + t, __FI, ".");
-	
+
 	
 	return answer; // Return the address of the answer string
 	

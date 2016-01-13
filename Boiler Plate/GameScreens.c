@@ -15,9 +15,7 @@ extern int currentState; // default current state of the program
 
 // Display Question Screen
 
-void questionScreen(void) {
-	char code[20];
-	
+void questionScreen(char *questionString) {
 	
 	if(currentState != QUESTION_SCREEN)
 		return;
@@ -32,14 +30,8 @@ void questionScreen(void) {
 	GLCD_DisplayString(4, 0, __FI, "Before the LED");
 	GLCD_DisplayString(5, 0, __FI, "countdown expires:");
 	
-	GenerateRandomString(5, code);
-	GLCD_DisplayString(7, 0, __FI, code);
-	
-	//RunTimer((unsigned long)1);
-	
-	delay10th(30);
-	GLCD_DisplayString(8, 0, __FI, "Ended");
-	
+	GenerateRandomString(5, questionString);
+	GLCD_DisplayString(7, 0, __FI, questionString);
 }
 
 

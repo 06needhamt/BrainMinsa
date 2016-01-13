@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <string.h>
 //STM32 MCU specific definitions
-#include "stm32f10x.h"                  /* STM32F10x.h definitions            */
+#include "stm32f10x.h"      /* STM32F10x.h definitions            */
 #include "GLCD.h"						/* Required for the LCD screen		  */
 
 #include "LED_Functions.h"
@@ -46,6 +46,10 @@ int currDifficulty = 0;
 int nextDifficulty = 0;
 int currentScore = 1337;
 uint32_t barWidth = 100;
+char questionString[20];
+char answerString[20];
+
+
 //This function delays program by secs seconds. This function relies on
 //a timer which is used to produce an interrupt at regular intervals. See
 //further down for the way this timer is activated. The timer interrupt
@@ -99,12 +103,15 @@ void Vectored_Interrupt(int button){
 						
 						currentState = QUESTION_SCREEN;
 					
-						questionScreen(); // Display the question screen
+						questionScreen(questionString); // Display the question screen
 													
 					break;
 					
 					case QUESTION_SCREEN: // Question Screen uses countdown timer - no inputs
-						
+							
+					
+					
+							
 					break;
 					
 					
@@ -217,7 +224,7 @@ int main (void) {
 	
 
 
-	initialiseGetAnswer(answer, 10);
+// initialiseGetAnswer(answer, 10);
 //	if(currentState == ON_DIFFICULTY_SCREEN)
 //	{
 //			GLCD_Clear(White);
@@ -229,7 +236,18 @@ int main (void) {
 //			DrawBarGraph(BAR_X,BAR_Y,currDifficulty * 20,BAR_HEIGHT,BAR_VALUE);
 //	}	
 	while (TRUE) {
-	
+		
+		
+		// Program pauses whilst Countdown timer ticks - this is necessary because the program does not like interrupts and delay timers
+		// i.e. SysTick does not work whilst interrupts being handled
+		// Gives the user time to memorise the code
+		// Program then advances to accept answer state
+		if(currentState == QUESTION_SCREEN) { // Delay countdown timer
+			RunTimer(5000);
+			currentState = ANSWER_SCREEN;
+			initialiseGetAnswer(answerString, currDifficulty);
+		}
+		
 		
 		
 //								
