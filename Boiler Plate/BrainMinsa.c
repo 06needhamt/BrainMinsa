@@ -21,11 +21,14 @@
 #include "Button_Functions.h"
 #include "Potentiometer_Functions.h"
 #include "Speaker_Functions.h"
+#include "CoundownTimer.h"
+#include "DifficultyScreen.h"
 
 #define TRUE		1
 #define FALSE		0
 
 #define LED_NUM     8                   /* Number of user LEDs  */
+#define TIMER_LENGTH 5000UL
 
 #define AWAIT_USER_READY 0; //state representing that the program should wait for the user to be ready for the next question
 #define AWAIT_USER_ANSWER 1; //state representing that the program should wait for the user to input their answer
@@ -46,6 +49,7 @@ int c = 0;
 int currDifficulty = 0;
 int nextDifficulty = 0;
 int currentScore = 1337;
+uint32_t barWidth = 100;
 //This function delays program by secs seconds. This function relies on
 //a timer which is used to produce an interrupt at regular intervals. See
 //further down for the way this timer is activated. The timer interrupt
@@ -191,6 +195,17 @@ int main (void) {
 	doTone = 0;
 			
 	while (TRUE) {
+								
+				//RunTimer(TIMER_LENGTH);
+			GLCD_SetBackColor(Red);
+			DrawBarGraph(100,6*24,barWidth,15,1);
+			delay10th(10000);
+			GLCD_SetBackColor(White);
+			barWidth -= 20;
+			if(barWidth <= 0){
+				barWidth = 100;
+			}
+			GLCD_DisplayString(6,0,__FI,"                   ");
 				//Check to see if ADC sampling is completed
 //				if (AD_done) {
 //					//Yes, so get part of the sample value
