@@ -32,13 +32,13 @@ void SysTick_Handler (void) {           /* SysTick Interrupt Handler (10ms)   */
 //		ticks    = 0;
 //		clock_1s = 1;
 //	}
-		Seed++;
+		
 	
 		if (ticks > 0) {
 		//Decrement the tick counter every 1 msec as long as it is greater than 0.
-		
 		ticks -= 1;
-	}
+		}
+		Seed++;
 }
 
 unsigned long GetTicks(){

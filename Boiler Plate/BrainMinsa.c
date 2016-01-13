@@ -21,11 +21,14 @@
 #include "Button_Functions.h"
 #include "Potentiometer_Functions.h"
 #include "Speaker_Functions.h"
+#include "CoundownTimer.h"
+#include "DifficultyScreen.h"
 
 #define TRUE		1
 #define FALSE		0
 
 #define LED_NUM     8                   /* Number of user LEDs  */
+#define TIMER_LENGTH 5000UL
 
 extern unsigned char clock_1s;
 
@@ -72,6 +75,7 @@ void Vectored_Interrupt(int button){
 				GLCD_DisplayString(0, 0, __FI, "< --User Button -- >");
 				
 				GLCD_DisplayString(6, 0, __FI, GenerateRandomString(5));
+							
 				//doTone = ~doTone;
 			break;
 		case JOYSTICK_SELECT:
@@ -101,6 +105,7 @@ int main (void) {
 	int loopCount = 1;
 	int i, c;
 	char potOutput[20];
+	uint32_t width = 100;
 
 	//Following statement sets the timer interrupt frequency
 	//The clock rate on this boards MCU is 72 Mhz - this means
@@ -200,9 +205,20 @@ int main (void) {
 			AD_done = 0;
 			ADC1->CR2 |= (1UL << 22);       		//Start the ADC conversion
 			doTone = 0;
-			
+
 			while (TRUE) {
 				
+				//RunTimer(TIMER_LENGTH);
+			GLCD_SetBackColor(Red);
+			DrawBarGraph(100,6*24,width,15,1);
+			delay10th(10000);
+			GLCD_SetBackColor(White);
+			width -= 20;
+			if(width <= 0){
+				width = 100;
+			}
+			GLCD_DisplayString(6,0,__FI,"                   ");
+			//GLCD_Clear(White);
 				//Check to see if ADC sampling is completed
 //				if (AD_done) {
 //					//Yes, so get part of the sample value
