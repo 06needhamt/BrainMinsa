@@ -5,10 +5,7 @@
 #include "LCD_Functions.h"
 #include "Button_Functions.h"
 #include "String_Functions.h"
-
-
-extern int currentState; // default current state of the program
-
+#include "GameConstants.h"
 
 void WelcomeScreen(void) {
 	
@@ -23,13 +20,7 @@ void WelcomeScreen(void) {
 	GLCD_DisplayString(6, 2, __FI, "Tom Needham");
 	GLCD_DisplayString(7, 2, __FI, "Chris Nicholas");
 	GLCD_DisplayString(9, 0, __FI, " Press User Button ");
-	
-
-	
-	
-	
-	
-	
-	
-	
 }
+
+
+

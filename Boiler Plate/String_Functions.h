@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
 #define ANSWER_LENGTH 20
 #define CHARSET_LENGTH 36
 
@@ -15,7 +13,10 @@ extern char OriginalCharSet[];
 
 extern void inputAnswer(int input);
 	
-char* GenerateAnswerString(int difficulty);
+// extern char* GenerateAnswerString(int difficulty);
+
+extern char* GenerateRandomString(int difficulty, char *codeString);
+
 	
 extern unsigned long GetTicks(void);
 extern void delay(int secs);

@@ -24,26 +24,9 @@
 #include "CoundownTimer.h"
 #include "DifficultyScreen.h"
 #include "String_Functions.h"
+#include "GameConstants.h"
+#include "GameScreens.h"
 
-
-#define TRUE		1
-#define FALSE		0
-
-#define LED_NUM     8                   /* Number of user LEDs  */
-#define TIMER_LENGTH 5000UL
-
-#define AWAIT_USER_READY 0 //state representing that the program should wait for the user to be ready for the next question
-#define AWAIT_USER_ANSWER 1 //state representing that the program should wait for the user to input their answer
-#define ON_DIFFICULTY_SCREEN 2 // state representing that the user is currently on the difficulty screen
-#define WELCOME_SCREEN 3 // Welcome Screen displayed
-
-#define BAR_X 200
-#define BAR_Y (6 * 24)
-#define BAR_WIDTH 100
-#define BAR_HEIGHT 15
-#define BAR_VALUE 1
-
-extern void WelcomeScreen(void);
 
 int currentState = WELCOME_SCREEN; //default current state of the program
 
@@ -53,7 +36,7 @@ extern unsigned char clock_1s;
 extern unsigned short AD_last;	 		//Last ADC conversion value
 extern unsigned char  AD_done;			//ADC conversion complete flag
 extern unsigned long ticks;
-extern char* GenerateRandomString(int difficulty);
+//extern char* GenerateRandomString(int difficulty);
 
 int doTone = 0;
 char outputString[20];
@@ -97,7 +80,7 @@ void Vectored_Interrupt(int button){
 		case USER_BUTTON:
 				//GLCD_DisplayString(0, 0, __FI, "< --User Button -- >");
 				switch(currentState) {
-					case WELCOME_SCREEN:
+					case WELCOME_SCREEN: // If on the welcome screen, set up difficulty screen
 						GLCD_Clear(White);
 						if(currDifficulty == 0){
 							currDifficulty = 1;
@@ -106,21 +89,30 @@ void Vectored_Interrupt(int button){
 						DisplayInstructions(NULL,currentScore,currDifficulty,1);
 						DrawBarGraph(BAR_X,BAR_Y,currDifficulty * 20,BAR_HEIGHT,BAR_VALUE);
 						
-						currentState = ON_DIFFICULTY_SCREEN;
+						currentState = DIFFICULTY_SCREEN;
 						
 					break;
 						
-					case ON_DIFFICULTY_SCREEN:	
+					case DIFFICULTY_SCREEN: // Transition to Question Screen
 						
+						updateScoreAndDifficulty(currentScore, currDifficulty, nextDifficulty);
+						
+						currentState = QUESTION_SCREEN;
+					
+						questionScreen(); // Display the question screen
+													
 					break;
 					
+					case QUESTION_SCREEN: // Question Screen uses countdown timer - no inputs
+						
+					break;
 					
 					
 				};
 						
 		
 		
-				GLCD_DisplayString(6, 0, __FI, GenerateRandomString(5));
+				//GLCD_DisplayString(6, 0, __FI, GenerateRandomString(5));
 				
 				//doTone = ~doTone;
 			break;
@@ -159,7 +151,7 @@ void Vectored_Interrupt(int button){
 			  //sprintf(cString, "%02d", c);
 		
 			switch(currentState) {
-				case ON_DIFFICULTY_SCREEN:
+				case DIFFICULTY_SCREEN:
 					nextDifficulty = (c / 3) + 1;
 					sprintf(currDiffString, "%1d", nextDifficulty);
 					//updateScoreAndDifficulty(currentScore, currDifficulty, nextDifficulty);
@@ -167,6 +159,7 @@ void Vectored_Interrupt(int button){
 					DrawBarGraph(BAR_X,BAR_Y,nextDifficulty * 20,BAR_HEIGHT,BAR_VALUE);
 					//GLCD_SetBackColor(Red);
 				break;
+				
 			}		
 					
 			break;

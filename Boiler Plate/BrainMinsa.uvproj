@@ -458,11 +458,6 @@
               <FilePath>.\CoundownTimer.c</FilePath>
             </File>
             <File>
-              <FileName>DifficultyScreen.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\DifficultyScreen.c</FilePath>
-            </File>
-            <File>
               <FileName>getAnswer.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\getAnswer.c</FilePath>
@@ -473,9 +468,14 @@
               <FilePath>.\Instruction_Screen.c</FilePath>
             </File>
             <File>
-              <FileName>WelcomeScreen.c</FileName>
+              <FileName>GameScreens.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\WelcomeScreen.c</FilePath>
+              <FilePath>.\GameScreens.c</FilePath>
+            </File>
+            <File>
+              <FileName>DifficultyScreen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DifficultyScreen.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -943,11 +943,6 @@
               <FilePath>.\CoundownTimer.c</FilePath>
             </File>
             <File>
-              <FileName>DifficultyScreen.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\DifficultyScreen.c</FilePath>
-            </File>
-            <File>
               <FileName>getAnswer.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\getAnswer.c</FilePath>
@@ -958,9 +953,14 @@
               <FilePath>.\Instruction_Screen.c</FilePath>
             </File>
             <File>
-              <FileName>WelcomeScreen.c</FileName>
+              <FileName>GameScreens.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\WelcomeScreen.c</FilePath>
+              <FilePath>.\GameScreens.c</FilePath>
+            </File>
+            <File>
+              <FileName>DifficultyScreen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DifficultyScreen.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1428,11 +1428,6 @@
               <FilePath>.\CoundownTimer.c</FilePath>
             </File>
             <File>
-              <FileName>DifficultyScreen.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\DifficultyScreen.c</FilePath>
-            </File>
-            <File>
               <FileName>getAnswer.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\getAnswer.c</FilePath>
@@ -1443,9 +1438,14 @@
               <FilePath>.\Instruction_Screen.c</FilePath>
             </File>
             <File>
-              <FileName>WelcomeScreen.c</FileName>
+              <FileName>GameScreens.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\WelcomeScreen.c</FilePath>
+              <FilePath>.\GameScreens.c</FilePath>
+            </File>
+            <File>
+              <FileName>DifficultyScreen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DifficultyScreen.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1913,11 +1913,6 @@
               <FilePath>.\CoundownTimer.c</FilePath>
             </File>
             <File>
-              <FileName>DifficultyScreen.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\DifficultyScreen.c</FilePath>
-            </File>
-            <File>
               <FileName>getAnswer.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\getAnswer.c</FilePath>
@@ -1928,9 +1923,14 @@
               <FilePath>.\Instruction_Screen.c</FilePath>
             </File>
             <File>
-              <FileName>WelcomeScreen.c</FileName>
+              <FileName>GameScreens.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\WelcomeScreen.c</FilePath>
+              <FilePath>.\GameScreens.c</FilePath>
+            </File>
+            <File>
+              <FileName>DifficultyScreen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DifficultyScreen.c</FilePath>
             </File>
           </Files>
         </Group>

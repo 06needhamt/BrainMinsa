@@ -1,0 +1,102 @@
+Difficulty 0 - 9
+
+
+Level and diffuculty
+
+1
+1 2 3 4 5
+
+
+2
+1 2 3 4 5 6
+
+
+3
+1 2 3 4 5 6 7
+
+
+4
+1 2 3 4 5 6 7 8
+
+
+5
+1 2 3 4 5 6 7 8 9 0 
+
+
+letter score = 10
+
+
+Score - Number of correct letters
+
+
+
+=
+= ================
+= 
+
+Correct letters go green, incorrect letters go red
+
+
+char answerString[30];
+
+
+char *getAnswer(int difficulty) {
+	
+
+
+brainMINSA {
+	
+
+}
+
+
+
+Welcome Screen with title
+	Press a key - or delay?
+
+Instruction screen:
+	Explaining how the game works
+	Difficulty
+	Entering letters
+	Accepting an answer
+
+Choose your difficulty and press Enter (User button) to confirm
+
+Game Loop {
+	Display code to be memorised - with countdown timer
+
+	Get answer
+
+	Mark answer
+
+	Give score (Press User Button to continue)
+
+	On to next question.
+
+	(Changes to potentiometer alter difficulty for next question)
+}
+
+
+Welcome Screen:
+BrainMINSA The memory game MENSA doesn't want you to see!
+
+
+Instruction Screen:
+Test and exercise your short term memory: 
+How many characters from the sequence can you remember?
+
+The game provides 5 levels of difficulty
+
+You can dynamically change the difficulty using the potentiometer. 
+Changes to the level will be reflected on the NEXT question.
+When you start a game you will be shown a sequence of characters to remember
+You will hava a short period to remember the sequence before it is hidden,
+then you must try to recreate the sequence on the answer screen.
+The more accurately you remember the sequence, the higher your score.
+Bonuses are awarded for perfect answers based on the game difficulty.
+
+Good luck
+Press the User button to continue.
+
+
+
