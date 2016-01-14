@@ -29,6 +29,9 @@ void answerScreen(char *questionString) {
 	GLCD_DisplayString(3, 0, __FI, "Please use Joystick");
 	GLCD_DisplayString(4, 0, __FI, "To enter the code");
 	GLCD_DisplayString(5, 0, __FI, "User button = finish");
+	
+	initialiseGetAnswer(currDifficulty);
+	
 	}
 
 

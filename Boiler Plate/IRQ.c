@@ -95,6 +95,9 @@ void EXTI9_5_IRQHandler (void) {
 		//will keep occuring again and again as the
 		//system thinks it is still pending!
     	EXTI->PR |= (1<<8);
+
+			if(EXTI->RTSR & 0x1F) // Filter out 'double tap' - interrupt being executed on both RISING and FALLING edge
+				return;
 			Vectored_Interrupt(USER_BUTTON);
 		//Set the flag to indicate button pressed status - need resetting later
 		//user_btn_int = 1;

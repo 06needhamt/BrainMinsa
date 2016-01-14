@@ -42,8 +42,8 @@ int doTone = 0;
 char outputString[20];
 unsigned int Seed = 0;
 int c = 0;
-int currDifficulty = 0;
-int nextDifficulty = 0;
+int currDifficulty = 1; // Starting level
+int nextDifficulty = 1; // Next difficulty (controlled by user changing potentiometer setting)
 int currentScore = 1337;
 uint32_t barWidth = 100;
 char questionString[20];
@@ -116,6 +116,7 @@ void Vectored_Interrupt(int button){
 					break;
 					
 					case ANSWER_SCREEN:
+						
 						answerScreen(questionString);
 						
 					
@@ -135,31 +136,30 @@ void Vectored_Interrupt(int button){
 		
 		case JOYSTICK_SELECT:
 				//GLCD_DisplayString(0, 0, __FI, "< --JSTK Select -->");
-				updateScoreAndDifficulty(100, 2, 3);
-				inputAnswer(JOYSTICK_SELECT);
+				// Left available for future program improvements
 			break;
 		
 		case JOYSTICK_UP:
 				//GLCD_DisplayString(0, 0, __FI, "< --JSTK UP   -- >");
-				updateScoreAndDifficulty(99999, 9, 9);
+				
 				inputAnswer(JOYSTICK_UP);
 			break;
 		
 		case JOYSTICK_DOWN:
 				//GLCD_DisplayString(0, 0, __FI, "< --JSTK DOWN -- >");
-				updateScoreAndDifficulty(0, 1, 2);
+				
 				inputAnswer(JOYSTICK_DOWN);
 			break;
 		
 		case JOYSTICK_RIGHT:
 				//GLCD_DisplayString(0, 0, __FI, "< --JSTK RIGHT-- >");
-				updateScoreAndDifficulty(12345, 6, 7);
+				
 				inputAnswer(JOYSTICK_RIGHT);
 			break;
 		
 		case JOYSTICK_LEFT:
 				//GLCD_DisplayString(0, 0, __FI, "< --JSTK LEFT -- >");
-				updateScoreAndDifficulty(1337, 1, 1);
+				
 				inputAnswer(JOYSTICK_LEFT);
 			break;
 		
@@ -253,7 +253,7 @@ int main (void) {
 		// Program then advances to accept answer state
 		if(currentState == QUESTION_SCREEN) { // Question Screen Delay countdown timer
 			RunTimer(5000);
-			initialiseGetAnswer(currDifficulty);
+			//initialiseGetAnswer(currDifficulty);
 			currentState = ANSWER_SCREEN;
 		}
 		
