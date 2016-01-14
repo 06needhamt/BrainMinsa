@@ -46,10 +46,13 @@ void answerScreen(void) {
 	GLCD_SetTextColor(Red);
 	GLCD_DisplayString(0, 5, __FI, "BrainMINSA");
 	GLCD_SetTextColor(White);
+	
+	updateScoreAndDifficulty(currentScore, currentDifficulty, nextDifficulty);
+	
 	GLCD_DisplayString(2, 0, __FI, "Answer Screen");
 	GLCD_DisplayString(3, 0, __FI, "Please use Joystick");
 	GLCD_DisplayString(4, 0, __FI, "To enter the code");
-	GLCD_DisplayString(5, 0, __FI, "User button = finish");
+	GLCD_DisplayString(9, 0, __FI, "User button = finish");
 	
 	initialiseGetAnswer(currentDifficulty);
 	
@@ -68,6 +71,9 @@ void questionScreen(void) {
 	GLCD_SetTextColor(Red);
 	GLCD_DisplayString(0, 5, __FI, "BrainMINSA");
 	GLCD_SetTextColor(White);
+	
+	updateScoreAndDifficulty(currentScore, currentDifficulty, nextDifficulty);
+	
 	GLCD_DisplayString(2, 0, __FI, "Question Screen");
 	GLCD_DisplayString(3, 0, __FI, "Memorise the code");
 	GLCD_DisplayString(4, 0, __FI, "Before the LED");

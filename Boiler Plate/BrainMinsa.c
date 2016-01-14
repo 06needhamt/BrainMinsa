@@ -136,6 +136,7 @@ void Vectored_Interrupt(int button){
 					
 					case NEXT_QUESTION: // Move on to next question
 						
+						currentDifficulty = nextDifficulty; // Set the difficulty
 						currentState = QUESTION_SCREEN;
 						questionScreen(); // Display the question screen
 
@@ -196,6 +197,21 @@ void Vectored_Interrupt(int button){
 					//GLCD_SetBackColor(Red);
 				break;
 				
+				case WELCOME_SCREEN:
+					
+				break;
+				
+				
+				default:
+					nextDifficulty = (c / 3) + 1;
+									
+					nextDifficulty = nextDifficulty > 5 ? 5 : nextDifficulty;
+					sprintf(currDiffString, "%1d", nextDifficulty);
+					
+					updateScoreAndDifficulty(currentScore, currentDifficulty, nextDifficulty);
+					
+					
+				break;
 			}		
 					
 			break;

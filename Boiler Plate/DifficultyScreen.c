@@ -52,6 +52,7 @@ void DisplayInstructions(void){
 		GLCD_DisplayString(0, 0, __FI, "     BrainMINSA     ");
 		GLCD_SetTextColor(White);
 		updateScoreAndDifficulty(currentScore, currentDifficulty, nextDifficulty);
-		GLCD_DisplayString(2,0,__FI,"Use the POT to change diff");
-		GLCD_DisplayString(3,0,__FI,"User button to continue");
+		GLCD_DisplayString(2,0,__FI,"Use POTENTIOMETER -");
+		GLCD_DisplayString(2,0,__FI,"to change difficulty");
+		GLCD_DisplayString(9,0,__FI,"User button = finish");
 }
