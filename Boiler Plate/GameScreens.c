@@ -13,7 +13,28 @@
 
 extern int currentState; // default current state of the program
 
-// Display Answer Screen
+// Display Marking Screen
+
+void markingScreen(void) {
+	if(currentState != MARKING_SCREEN)
+		return;
+	
+	GLCD_Clear(Blue);                    /* Clear graphical LCD display        */
+	GLCD_SetBackColor(Blue);
+	GLCD_SetTextColor(Red);
+	GLCD_DisplayString(0, 5, __FI, "BrainMINSA");
+	GLCD_SetTextColor(White);
+	GLCD_DisplayString(2, 0, __FI, "Below is your marked");
+	GLCD_DisplayString(3, 0, __FI, "answer:");
+	GLCD_DisplayString(4, 0, __FI, "Green = Correct");
+	GLCD_DisplayString(5, 0, __FI, "Red = Incorrect");
+	
+	GLCD_DisplayString(9, 0, __FI, "User button = finish");	
+}
+
+
+
+// Display Enter Answer Screen
 
 void answerScreen(char *questionString) {
 	

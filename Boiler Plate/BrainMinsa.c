@@ -25,6 +25,7 @@
 #include "DifficultyScreen.h"
 #include "String_Functions.h"
 #include "GameConstants.h"
+#include "GameFunctions.h"
 #include "GameScreens.h"
 
 
@@ -118,11 +119,16 @@ void Vectored_Interrupt(int button){
 					case ANSWER_SCREEN:
 						
 						answerScreen(questionString);
-						
-					
 					
 						currentDifficulty = nextDifficulty; // Set the difficulty
+					
+						currentState = MARKING_SCREEN; // Mark the users answer
 					break;
+					
+					case MARKING_SCREEN: // Mark the users answer attempt
+						markAnswer();
+					break;
+						
 					
 					
 				};

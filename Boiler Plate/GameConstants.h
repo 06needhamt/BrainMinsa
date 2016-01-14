@@ -15,6 +15,7 @@
 #define IN_GAME 10 // Inside the game
 #define QUESTION_SCREEN 11 // In Question Screen
 #define ANSWER_SCREEN 12 // In getAnswer screen
+#define MARKING_SCREEN 13 // Mark the users answer attempt
 
 #define BAR_X 200
 #define BAR_Y (6 * 24)

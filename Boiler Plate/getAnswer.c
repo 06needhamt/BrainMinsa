@@ -5,13 +5,14 @@
 #include "Button_Functions.h"
 #include "String_Functions.h"
 #include "GameConstants.h"
+#include "GameFunctions.h"
+#include "GameScreens.h"
 
 
 void joystickLeft(void);
 void joystickRight(void);
 void joystickUp(void);
 void joystickDown(void);
-void acceptPressed(void);
 
 // define letter place holder as a . (dot)
 #define LETTER_PLACEHOLDER '.'
@@ -80,7 +81,7 @@ void inputAnswer(int input) {
 	
 	switch(input) {
 		case USER_BUTTON:
-				acceptPressed();// Accept button pressed
+				markAnswer();// Accept button pressed
 		break;
 		case JOYSTICK_UP:
 				joystickUp();    // Up on joystick
@@ -222,24 +223,29 @@ void joystickDown() {
 }
 
 // User pressed ACCEPT button
-void acceptPressed() {
+void markAnswer(void) {
 	int t;
 	int position;
 	unsigned char letters[2] = {'\0', '\0'}; // Short string used to display letters
+
+	// Copy answer into answerString
+	
 	
 	if(!getAnswerState) // Not expecting an answer so do nothing
 		return;
+	
+	markingScreen(); // Display the answer screen
 	
   GLCD_SetTextColor(White);
 	
 	// Compare the correct answer with the users answer and highlight correct/incorrect letters
 
-	for(t = 0; answerString[t] != 0; t++) {
-		position = margin + t;
+	for(t = 0; answerDetails.answerString[t] != 0; t++) {
+		position = margin;
 		
-		letters[0] = answerString[t]; // Get the letter
+		letters[0] = answerDetails.answerString[t]; // Get the letter
 		
-		if(answerString[t] == questionString[t]) { // Correct letter
+		if(answerDetails.answerString[t] == questionString[t]) { // Correct letter
 			GLCD_SetBackColor(Green); // Highlight colour for correct letter
 			
 			currentScore += 10; // Update score

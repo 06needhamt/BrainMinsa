@@ -3,3 +3,4 @@
 extern void WelcomeScreen(void);
 extern void questionScreen(char *questionString);
 extern void answerScreen(char *questionString);
+extern void markingScreen(void);
