@@ -1,23 +1,19 @@
 Difficulty 0 - 9
 
 
-Level and diffuculty
+Level and diffuculty (number of characters in the code)
 
 1
 1 2 3 4 5
 
-
 2
 1 2 3 4 5 6
-
 
 3
 1 2 3 4 5 6 7
 
-
 4
 1 2 3 4 5 6 7 8
-
 
 5
 1 2 3 4 5 6 7 8 9 0 
@@ -81,22 +77,78 @@ Welcome Screen:
 BrainMINSA The memory game MENSA doesn't want you to see!
 
 
-Instruction Screen:
-Test and exercise your short term memory: 
-How many characters from the sequence can you remember?
+...................
+char *instructionText[] = {{"Instruction Screen:"},
+{"Test and exercise"},
+{"your short term "},
+{"memory:"},
+{"How many characters"},
+{"from the sequence"},
+{"can you remember?"},
+{" "},
+{"The game provides"},
+{"5 levels of"},
+{"difficulty{""},
+{" "},
+{"You can dynamically"},
+{"change the"},
+{"difficulty using"},
+{"the potentiometer."},
+{"Changes to the"},
+{"level will be"},
+{"reflected on the"},
+{"NEXT question."},
+{"When you start a"},
+{"game you will be"},
+{"shown a sequence of"},
+{"characters to"},
+{"remember"},
+{"You will hava a"},
+{"short period to"},
+{"remember the"},
+{"sequence before it"},
+{"is hidden, then you"},
+{"must try to"},
+{"recreate the"},
+{"sequence on the"},
+{"answer screen."},
+{"The more accurately"},
+{"you remember the"},
+{"sequence, the"},
+{"higher your score."},
+{"Bonuses are awarded"},
+{"for perfect answers"},
+{"based on the game"},
+{"difficulty.{""},
+{" "},
+{"Good luck"},
+{"Press the User"},
+{"button to continue."} }
 
-The game provides 5 levels of difficulty
-
-You can dynamically change the difficulty using the potentiometer. 
-Changes to the level will be reflected on the NEXT question.
-When you start a game you will be shown a sequence of characters to remember
-You will hava a short period to remember the sequence before it is hidden,
-then you must try to recreate the sequence on the answer screen.
-The more accurately you remember the sequence, the higher your score.
-Bonuses are awarded for perfect answers based on the game difficulty.
-
-Good luck
-Press the User button to continue.
 
 
+GAME STATES
 
+Welcome Screen
+	- Waiting for button press
+
+Intro Screen
+	Waiting for joystick
+	Waiting for button
+
+Difficulty Screen
+	- Waiting pot 
+	- Waiting for button
+
+Question Screen
+	- Waiting for either timer or button
+
+Answer Screen
+	- Waiting for joystick
+	- Waiting for pot
+	- Waiting for button
+
+INPUT STATES
+	1 - BUTTON - Button has been pressed
+	2 - POT - Potentiometer has been adjusted
+	3 - JOYSTICK - Joystick moved

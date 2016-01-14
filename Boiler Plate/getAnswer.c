@@ -4,6 +4,7 @@
 #include "LCD_Functions.h"
 #include "Button_Functions.h"
 #include "String_Functions.h"
+#include "GameConstants.h"
 
 
 void joystickLeft(void);
@@ -14,6 +15,7 @@ void acceptPressed(void);
 
 // define letter place holder as a . (dot)
 #define LETTER_PLACEHOLDER '.'
+#define ROW_NUMBER 7
 
 
 // Structure holds the state of entry by the user
@@ -23,7 +25,7 @@ static int length = 0;
 static int margin = 0;
 
 
-char *initialiseGetAnswer(char *answer, int len) { // Len based on difficulty
+void initialiseGetAnswer(int len) { // Len based on difficulty
 	int t;
 	int position;
   unsigned char letters[2] = {'\0', '\0'}; // Short string used to display letters
@@ -34,10 +36,13 @@ char *initialiseGetAnswer(char *answer, int len) { // Len based on difficulty
 	len+=4;
 	
 	if(getAnswerState == 1)  // Get answer is is already functioning
-		return ""; // <<<<<<<<<<<<<<<<< fix this
+		return;
 	
 	getAnswerState = 1; // Signal getAnswerState is active
-	
+
+//	answerString = answer; // Point answerString as answer
+//	questionString = question; // Point at the question - ready for marking 
+		
 	answerDetails.letterIndex = 0; // index first character of answer string
 	
 	for(t = 0; t < len; t++)
@@ -54,17 +59,17 @@ char *initialiseGetAnswer(char *answer, int len) { // Len based on difficulty
 	letters[0] = LETTER_PLACEHOLDER;
 	GLCD_SetBackColor(Red);
 	GLCD_SetTextColor(White);
-	GLCD_DisplayString(5, position, __FI, letters);
+	GLCD_DisplayString(ROW_NUMBER, position, __FI, letters);
 	
 	// Reset default text colours
 	GLCD_SetBackColor(Blue);
 	GLCD_SetTextColor(White);
 	
 	for(t = 1; t < length; t++) 
-		GLCD_DisplayString(5, position + t, __FI, letters);
+		GLCD_DisplayString(ROW_NUMBER, position + t, __FI, letters);
 
 	
-	return answer; // Return the address of the answer string
+	return; // Return the address of the answer string
 	
 }
 
@@ -103,7 +108,7 @@ void joystickLeft() {
 	letters[0] = answerDetails.answerString[answerDetails.letterIndex];
 	GLCD_SetBackColor(Blue);
 	GLCD_SetTextColor(White);
-	GLCD_DisplayString(5, position, __FI, letters);
+	GLCD_DisplayString(ROW_NUMBER, position, __FI, letters);
 	
 	// Move the cursor left
 	if(--answerDetails.letterIndex < 0) {
@@ -115,7 +120,7 @@ void joystickLeft() {
 	letters[0] = answerDetails.answerString[answerDetails.letterIndex];
 	GLCD_SetBackColor(Red);
 	GLCD_SetTextColor(White);
-	GLCD_DisplayString(5, position, __FI, letters);
+	GLCD_DisplayString(ROW_NUMBER, position, __FI, letters);
 	
 	// Reset default text colours
 	GLCD_SetBackColor(Blue);
@@ -135,7 +140,7 @@ void joystickRight() {
 	letters[0] = answerDetails.answerString[answerDetails.letterIndex];
 	GLCD_SetBackColor(Blue);
 	GLCD_SetTextColor(White);
-	GLCD_DisplayString(5, position, __FI, letters);
+	GLCD_DisplayString(ROW_NUMBER, position, __FI, letters);
 
 	if(++answerDetails.letterIndex >= length) {
 		answerDetails.letterIndex = 0;
@@ -146,7 +151,7 @@ void joystickRight() {
 	letters[0] = answerDetails.answerString[answerDetails.letterIndex];
 	GLCD_SetBackColor(Red);
 	GLCD_SetTextColor(White);
-	GLCD_DisplayString(5, position, __FI, letters);
+	GLCD_DisplayString(ROW_NUMBER, position, __FI, letters);
 	
 	// Reset default text colours
 	GLCD_SetBackColor(Blue);
@@ -178,7 +183,7 @@ void joystickUp() {
 	letters[0] = OriginalCharSet[index]; // Put the new letter into a printable string
 	GLCD_SetBackColor(Red);
 	GLCD_SetTextColor(White);
-	GLCD_DisplayString(5, position, __FI, letters);
+	GLCD_DisplayString(ROW_NUMBER, position, __FI, letters);
 	
 	// Reset default text colours
 	GLCD_SetBackColor(Blue);
@@ -209,7 +214,7 @@ void joystickDown() {
 	letters[0] = OriginalCharSet[index]; // Put the new letter into a printable string
 	GLCD_SetBackColor(Red);
 	GLCD_SetTextColor(White);
-	GLCD_DisplayString(5, position, __FI, letters);
+	GLCD_DisplayString(ROW_NUMBER, position, __FI, letters);
 	
 	// Reset default text colours
 	GLCD_SetBackColor(Blue);
@@ -218,14 +223,36 @@ void joystickDown() {
 
 // User pressed ACCEPT button
 void acceptPressed() {
+	int t;
+	int position;
+	unsigned char letters[2] = {'\0', '\0'}; // Short string used to display letters
+	
 	if(!getAnswerState) // Not expecting an answer so do nothing
 		return;
 	
+  GLCD_SetTextColor(White);
+	
 	// Compare the correct answer with the users answer and highlight correct/incorrect letters
+
+	for(t = 0; answerString[t] != 0; t++) {
+		position = margin + t;
+		
+		letters[0] = answerString[t]; // Get the letter
+		
+		if(answerString[t] == questionString[t]) { // Correct letter
+			GLCD_SetBackColor(Green); // Highlight colour for correct letter
+			
+			currentScore += 10; // Update score
+		}
+		else { // Incorrect letter
+			GLCD_SetBackColor(Red); // Highlight colour for incorrect letter
+		}
+
+		GLCD_DisplayString(ROW_NUMBER, position + t, __FI, letters);
+		
+	}
 	
-	
-	
-	
+	updateScoreAndDifficulty(currentScore, currDifficulty, nextDifficulty);
 	
 	getAnswerState = 0; // Answer accepted no longer taking input
 }

@@ -23,3 +23,9 @@
 #define BAR_VALUE 1
 
 extern int currentState; // default current state of the program
+extern int currentScore; // The current score
+extern int currDifficulty; // The current difficulty
+extern int nextDifficulty; // The next difficulty
+
+extern char answerString[20]; // String into which answers are stored
+extern char questionString[20]; // String stores the question code

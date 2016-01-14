@@ -82,6 +82,7 @@ void Vectored_Interrupt(int button){
 	
 	switch(button){
 		case USER_BUTTON:
+
 				//GLCD_DisplayString(0, 0, __FI, "< --User Button -- >");
 				switch(currentState) {
 					case WELCOME_SCREEN: // If on the welcome screen, set up difficulty screen
@@ -100,18 +101,26 @@ void Vectored_Interrupt(int button){
 					case DIFFICULTY_SCREEN: // Transition to Question Screen
 						
 						updateScoreAndDifficulty(currentScore, currDifficulty, nextDifficulty);
+					
+						currDifficulty = nextDifficulty; // Set the difficulty
 						
 						currentState = QUESTION_SCREEN;
 					
 						questionScreen(questionString); // Display the question screen
-													
+					
+					
 					break;
 					
 					case QUESTION_SCREEN: // Question Screen uses countdown timer - no inputs
-							
+						
+					break;
+					
+					case ANSWER_SCREEN:
+						answerScreen(questionString);
+						
 					
 					
-							
+						currDifficulty = nextDifficulty; // Set the difficulty
 					break;
 					
 					
@@ -242,10 +251,10 @@ int main (void) {
 		// i.e. SysTick does not work whilst interrupts being handled
 		// Gives the user time to memorise the code
 		// Program then advances to accept answer state
-		if(currentState == QUESTION_SCREEN) { // Delay countdown timer
+		if(currentState == QUESTION_SCREEN) { // Question Screen Delay countdown timer
 			RunTimer(5000);
+			initialiseGetAnswer(currDifficulty);
 			currentState = ANSWER_SCREEN;
-			initialiseGetAnswer(answerString, currDifficulty);
 		}
 		
 		

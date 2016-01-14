@@ -13,6 +13,25 @@
 
 extern int currentState; // default current state of the program
 
+// Display Answer Screen
+
+void answerScreen(char *questionString) {
+	
+	if(currentState != ANSWER_SCREEN)
+		return;
+	
+	GLCD_Clear(Blue);                    /* Clear graphical LCD display        */
+	GLCD_SetBackColor(Blue);
+	GLCD_SetTextColor(Red);
+	GLCD_DisplayString(0, 5, __FI, "BrainMINSA");
+	GLCD_SetTextColor(White);
+	GLCD_DisplayString(2, 0, __FI, "Answer Screen");
+	GLCD_DisplayString(3, 0, __FI, "Please use Joystick");
+	GLCD_DisplayString(4, 0, __FI, "To enter the code");
+	GLCD_DisplayString(5, 0, __FI, "User button = finish");
+	}
+
+
 // Display Question Screen
 
 void questionScreen(char *questionString) {
