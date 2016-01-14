@@ -49,7 +49,7 @@ void DrawBarGraph(uint32_t x, uint32_t y, uint32_t w, uint32_t h, int32_t val){
 void DisplayInstructions(void){
 		GLCD_SetBackColor(Blue);
 		GLCD_SetTextColor(Red);
-		GLCD_DisplayString(0, 5, __FI, "     BrainMINSA     ");
+		GLCD_DisplayString(0, 0, __FI, "     BrainMINSA     ");
 		GLCD_SetTextColor(White);
 		updateScoreAndDifficulty(currentScore, currentDifficulty, nextDifficulty);
 		GLCD_DisplayString(2,0,__FI,"Use the POT to change diff");
