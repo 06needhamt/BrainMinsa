@@ -252,7 +252,7 @@ void acceptPressed() {
 		
 	}
 	
-	updateScoreAndDifficulty(currentScore, currDifficulty, nextDifficulty);
+	updateScoreAndDifficulty(currentScore, currentDifficulty, nextDifficulty);
 	
 	getAnswerState = 0; // Answer accepted no longer taking input
 }

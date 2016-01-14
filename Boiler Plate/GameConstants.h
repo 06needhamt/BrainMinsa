@@ -24,7 +24,7 @@
 
 extern int currentState; // default current state of the program
 extern int currentScore; // The current score
-extern int currDifficulty; // The current difficulty
+extern int currentDifficulty; // The current difficulty
 extern int nextDifficulty; // The next difficulty
 
 extern char answerString[20]; // String into which answers are stored

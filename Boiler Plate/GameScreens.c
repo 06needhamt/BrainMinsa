@@ -30,7 +30,7 @@ void answerScreen(char *questionString) {
 	GLCD_DisplayString(4, 0, __FI, "To enter the code");
 	GLCD_DisplayString(5, 0, __FI, "User button = finish");
 	
-	initialiseGetAnswer(currDifficulty);
+	initialiseGetAnswer(currentDifficulty);
 	
 	}
 
@@ -52,7 +52,9 @@ void questionScreen(char *questionString) {
 	GLCD_DisplayString(4, 0, __FI, "Before the LED");
 	GLCD_DisplayString(5, 0, __FI, "countdown expires:");
 	
-	GenerateRandomString(5, questionString);
+	
+	
+	GenerateRandomString(currentDifficulty, questionString);
 	GLCD_DisplayString(7, 0, __FI, questionString);
 }
 
@@ -65,7 +67,7 @@ void WelcomeScreen(void) {
 	GLCD_SetBackColor(Blue);
 	GLCD_SetTextColor(Red);
 	GLCD_DisplayString(0, 0, __FI, "Welcome 2 BrainMINSA");
-	GLCD_SetTextColor(Red);
+	GLCD_SetTextColor(White);
 	GLCD_DisplayString(4, 0, __FI, "By");
 	GLCD_DisplayString(5, 2, __FI, "Alex Keidel");
 	GLCD_DisplayString(6, 2, __FI, "Tom Needham");

@@ -42,9 +42,9 @@ int doTone = 0;
 char outputString[20];
 unsigned int Seed = 0;
 int c = 0;
-int currDifficulty = 1; // Starting level
+int currentDifficulty = 1; // Starting level
 int nextDifficulty = 1; // Next difficulty (controlled by user changing potentiometer setting)
-int currentScore = 1337;
+int currentScore = 0;
 uint32_t barWidth = 100;
 char questionString[20];
 char answerString[20];
@@ -87,12 +87,12 @@ void Vectored_Interrupt(int button){
 				switch(currentState) {
 					case WELCOME_SCREEN: // If on the welcome screen, set up difficulty screen
 						GLCD_Clear(White);
-						if(currDifficulty == 0){
-							currDifficulty = 1;
+						if(currentDifficulty == 0){
+							currentDifficulty = 1;
 						}
 						updateNextDifficulty(nextDifficulty);
-						DisplayInstructions(NULL,currentScore,currDifficulty,1);
-						DrawBarGraph(BAR_X,BAR_Y,currDifficulty * 20,BAR_HEIGHT,BAR_VALUE);
+						DisplayInstructions();
+						DrawBarGraph(BAR_X,BAR_Y,currentDifficulty * 20,BAR_HEIGHT,BAR_VALUE);
 						
 						currentState = DIFFICULTY_SCREEN;
 						
@@ -100,9 +100,9 @@ void Vectored_Interrupt(int button){
 						
 					case DIFFICULTY_SCREEN: // Transition to Question Screen
 						
-						updateScoreAndDifficulty(currentScore, currDifficulty, nextDifficulty);
+						updateScoreAndDifficulty(currentScore, currentDifficulty, nextDifficulty);
 					
-						currDifficulty = nextDifficulty; // Set the difficulty
+						currentDifficulty = nextDifficulty; // Set the difficulty
 						
 						currentState = QUESTION_SCREEN;
 					
@@ -121,7 +121,7 @@ void Vectored_Interrupt(int button){
 						
 					
 					
-						currDifficulty = nextDifficulty; // Set the difficulty
+						currentDifficulty = nextDifficulty; // Set the difficulty
 					break;
 					
 					
@@ -169,6 +169,9 @@ void Vectored_Interrupt(int button){
 			switch(currentState) {
 				case DIFFICULTY_SCREEN:
 					nextDifficulty = (c / 3) + 1;
+									
+					nextDifficulty = nextDifficulty > 5 ? 5 : nextDifficulty;
+				
 					sprintf(currDiffString, "%1d", nextDifficulty);
 					//updateScoreAndDifficulty(currentScore, currDifficulty, nextDifficulty);
 					updateNextDifficulty(nextDifficulty);

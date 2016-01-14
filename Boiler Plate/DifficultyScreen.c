@@ -1,4 +1,5 @@
 #include "DifficultyScreen.h"
+#include "GameConstants.h"
 
 
 
@@ -39,17 +40,18 @@ void DrawBarGraph(uint32_t x, uint32_t y, uint32_t w, uint32_t h, int32_t val){
 					break;
 					
 					default:
-						GLCD_SetBackColor(Black);
-						GLCD_Bargraph(x,y,100,h,val);
-						GLCD_SetBackColor(White);
+
 					break;
 			}
 		  
 }
 
-void DisplayInstructions(char* message, int score, int currentDifficulty, int nextDifficulty){
-		GLCD_DisplayString(0, 0, __FI, "<----BrainMINSA---->");
-		updateScoreAndDifficulty(score,currentDifficulty,nextDifficulty);
+void DisplayInstructions(void){
+		GLCD_SetBackColor(Blue);
+		GLCD_SetTextColor(Red);
+		GLCD_DisplayString(0, 5, __FI, "     BrainMINSA     ");
+		GLCD_SetTextColor(White);
+		updateScoreAndDifficulty(currentScore, currentDifficulty, nextDifficulty);
 		GLCD_DisplayString(2,0,__FI,"Use the POT to change diff");
 		GLCD_DisplayString(3,0,__FI,"User button to continue");
 }

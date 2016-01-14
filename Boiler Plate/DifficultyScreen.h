@@ -6,4 +6,4 @@
 
 void DrawBarGraph(uint32_t x, uint32_t y, uint32_t w, uint32_t h, int32_t val);
 
-void DisplayInstructions(char* message, int score, int currentDifficulty, int nextDifficulty);
+void DisplayInstructions(void);
