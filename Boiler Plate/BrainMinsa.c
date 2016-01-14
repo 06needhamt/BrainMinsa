@@ -107,7 +107,7 @@ void Vectored_Interrupt(int button){
 						
 						currentState = QUESTION_SCREEN;
 					
-						questionScreen(questionString); // Display the question screen
+						questionScreen(); // Display the question screen
 					
 					
 					break;
@@ -118,20 +118,31 @@ void Vectored_Interrupt(int button){
 					
 					case ANSWER_SCREEN:
 						
-						answerScreen(questionString);
-					
-						currentDifficulty = nextDifficulty; // Set the difficulty
+						//answerScreen();
 					
 						currentState = MARKING_SCREEN; // Mark the users answer
 					break;
 					
+
+					
 					case MARKING_SCREEN: // Mark the users answer attempt
 						markAnswer();
+					
+						currentDifficulty = nextDifficulty; // Set the difficulty
+					
+						currentState = NEXT_QUESTION;
+					
 					break;
+					
+					case NEXT_QUESTION: // Move on to next question
 						
+						currentState = QUESTION_SCREEN;
+						questionScreen(); // Display the question screen
+
 					
+					break;
 					
-				};
+			};
 						
 		
 		
@@ -262,8 +273,11 @@ int main (void) {
 		// Program then advances to accept answer state
 		if(currentState == QUESTION_SCREEN) { // Question Screen Delay countdown timer
 			RunTimer(5000);
-			//initialiseGetAnswer(currDifficulty);
+			
 			currentState = ANSWER_SCREEN;
+			answerScreen();
+			
+			Vectored_Interrupt(USER_BUTTON); // Simulate user pressing the button
 		}
 		
 		

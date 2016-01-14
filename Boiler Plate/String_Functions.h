@@ -29,4 +29,4 @@ struct entryDetails {
 	char answerString[20];  // Holds the list of characters input by the user
 };
 
-void initialiseGetAnswer(int length); // Initialises get answer 
+extern void initialiseGetAnswer(int length); // Initialises get answer 

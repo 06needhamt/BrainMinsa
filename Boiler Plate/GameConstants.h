@@ -16,6 +16,7 @@
 #define QUESTION_SCREEN 11 // In Question Screen
 #define ANSWER_SCREEN 12 // In getAnswer screen
 #define MARKING_SCREEN 13 // Mark the users answer attempt
+#define NEXT_QUESTION 14 // Ready to move on to next question
 
 #define BAR_X 200
 #define BAR_Y (6 * 24)

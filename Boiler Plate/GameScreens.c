@@ -36,7 +36,7 @@ void markingScreen(void) {
 
 // Display Enter Answer Screen
 
-void answerScreen(char *questionString) {
+void answerScreen(void) {
 	
 	if(currentState != ANSWER_SCREEN)
 		return;
@@ -58,7 +58,7 @@ void answerScreen(char *questionString) {
 
 // Display Question Screen
 
-void questionScreen(char *questionString) {
+void questionScreen(void) {
 	
 	if(currentState != QUESTION_SCREEN)
 		return;
@@ -72,8 +72,6 @@ void questionScreen(char *questionString) {
 	GLCD_DisplayString(3, 0, __FI, "Memorise the code");
 	GLCD_DisplayString(4, 0, __FI, "Before the LED");
 	GLCD_DisplayString(5, 0, __FI, "countdown expires:");
-	
-	
 	
 	GenerateRandomString(currentDifficulty, questionString);
 	GLCD_DisplayString(7, 0, __FI, questionString);

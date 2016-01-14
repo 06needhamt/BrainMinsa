@@ -1,6 +1,6 @@
 // Game Screen Definitions
 
 extern void WelcomeScreen(void);
-extern void questionScreen(char *questionString);
-extern void answerScreen(char *questionString);
+extern void questionScreen(void);
+extern void answerScreen(void);
 extern void markingScreen(void);
